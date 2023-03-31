@@ -25,7 +25,7 @@ The software OVITO can be used to visualize the results files "*.movie" or "*.xy
 
 2.2 Installation
     Download the file FEcMD.zip.
-    There are two approaches to install FEcMD:
+    There are two approaches to install FEcMD (select one of them):
 
 (1) Extract the executable without modifying the source code.
 
@@ -73,7 +73,7 @@ Add ‘/PATH/TO/FEcMD/lib/deal.II/lib’ below the ‘include ld.so.conf.d/*.con
     $ cd example/the/folder/contains/*.sh
     $ bash *.sh
 
-(2) Run the program by compiling the FEcMD source code.
+(2) Install the program by compiling the FEcMD source code.
 
 This method is relative complicated, but if you need to modify the source code, use this method to compile and install FEcMD.
 
