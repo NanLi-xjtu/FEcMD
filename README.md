@@ -74,10 +74,14 @@ Add ‘/PATH/TO/FEcMD/lib/deal.II/lib’ below the ‘include ld.so.conf.d/*.con
     $ bash *.sh
 
 (2) Run the program by compiling the FEcMD source code.
+
 This method is relative complicated, but if you need to modify the source code, use this method to compile and install FEcMD.
+
 Compile deal.II, libxc, FEMOCS, and MLIP library, respectively. Then, place the static libraries in the lib directory and link the dynamic libraries. The detailed steps are in the README or Makefile in the corresponding directories.
 
-## Compile and install deal.II library. The method refer to (1).
+## Compile and install deal.II library. 
+
+The method refer to (1).
 
 ## Compile and install libxc library with:
     $ cd lib/libxc
@@ -113,34 +117,58 @@ Compile deal.II, libxc, FEMOCS, and MLIP library, respectively. Then, place the 
 There are various commands to perform the corresponding function.
 
 Perform ED-MD simulation:
+
     $ ./fecmd
+	
 Perform ED simulation:
+
     $ ./fecmd ED
+	
 Perform MD simulation:
+
     $ ./fecmd MD
+	
 Perform Maxwell stress MD simulation:
+
     $ ./fecmd Maxwell
+	
 Perform heat transport simulation:
+
     $ ./fecmd heattransport
+	
 Generate Pyramidal-hemisphere tip:
+
     $ ./fecmd PH
+	
 Generate Mushroom-head tip:
+
     $ ./fecmd MH
+	
 Generate Prolate-spheroidal tip:
+
     $ ./fecmd PS
+	
 Generate Hemi-ellipsoidal tip:
+
     $ ./fecmd HE
+	
 Generate Cylinder tip:
+
     $ ./fecmd Cylinder
+	
 Generate Cone tip:
+
     $ ./fecmd Cone
 
 3.2 Examples
+
 Five examples in the corresponding paper were attached in FEcMD/example. Change to the example directory and run the bash script:
+
     $ cd the/folder/contains/*.sh/in/example
     $ bash *.sh
 
 3.3 input and output files
+
 The following is the input file and output file documents.
 
 ## Input file:
