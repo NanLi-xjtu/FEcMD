@@ -17,12 +17,12 @@ The software OVITO can be used to visualize the results files "*.movie" or "*.xy
     $ sudo apt-get install paraview
 
 2.2 Installation
-    Download the file FEcMD.tar.
+    Download the file FEcMD.zip.
     There are two approaches to install FEcMD:
 
 (1) Extract the executable without modifying the source code.
 ## Run the following commands to extract and access to all of the original files:
-    $ tar -zxvf FEcMD.tar 
+    $ unzip FEcMD.zip 
     $ sudo chmod -R 775 FEcMD
     $ cd FEcMD
 
