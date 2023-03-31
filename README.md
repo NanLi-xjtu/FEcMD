@@ -1,18 +1,25 @@
 1. Introduction
+
 Field emission coupled with molecular dynamics simulation (FEcMD) software package is a computational tool for studying the electron emission characteristics and the atomic structure evolution of micro- and nano-protrusions made of pure metals or multi-component alloys by means of multi-physics and multi-scale methodology. 
 
 2. FEcMD Preparation
 
 2.1 Software environment
+
 Only Ubuntu 16 is supported. The g++, gfortran and cmake compilers need to be installed in advance. 
+
     $ sudo apt-get update
     $ sudo apt-get install g++
     $ sudo apt-get install gfortran
     $ sudo apt-get install cmake
+	
 vim and unzip sould be also installed with:
+
     $ sudo apt-get install vim
     $ sudo apt-get install unzip
+	
 The software OVITO can be used to visualize the results files "*.movie" or "*.xyz". The software PARAVIEW can be used to visualize the results files "*.vtk".
+
     $ sudo apt-get install ovito
     $ sudo apt-get install paraview
 
@@ -21,6 +28,7 @@ The software OVITO can be used to visualize the results files "*.movie" or "*.xy
     There are two approaches to install FEcMD:
 
 (1) Extract the executable without modifying the source code.
+
 ## Run the following commands to extract and access to all of the original files:
     $ unzip FEcMD.zip 
     $ sudo chmod -R 775 FEcMD
@@ -28,10 +36,15 @@ The software OVITO can be used to visualize the results files "*.movie" or "*.xy
 
 ## The following are documents and folders in FEcMD after extracting:
 --fecmd: executable file for this program
+
 --example: this directory contains the example in the paper, user can run the *.sh to test examples.
+
 --in: this directory contains the input files
+
 --obj: this directory contains the object files during compilation
+
 --out: this directory contains the output files
+
 --lib: this directory contains the libraries.
 
 ## Then configure, compile, and install the deal.II library with:
@@ -42,10 +55,14 @@ The software OVITO can be used to visualize the results files "*.movie" or "*.xy
     $ make install    (alternatively $ make -j<N> install)
     $ make test
 Add the dynamic library directory to the configuration file of the shared library:
+
     $ sudo vim /etc/ld.so.conf
+	
 Add ‘/PATH/TO/FEcMD/lib/deal.II/lib’ below the ‘include ld.so.conf.d/*.conf’, save and quit.
+
     $ sudo /sbin/ldconfig -v
     $ sudo ldconfig
+	
 ## Next, extract and run the executable
     $ cd ../../../../
 	$ unzip executable_file.zip
@@ -59,7 +76,9 @@ Add ‘/PATH/TO/FEcMD/lib/deal.II/lib’ below the ‘include ld.so.conf.d/*.con
 (2) Run the program by compiling the FEcMD source code.
 This method is relative complicated, but if you need to modify the source code, use this method to compile and install FEcMD.
 Compile deal.II, libxc, FEMOCS, and MLIP library, respectively. Then, place the static libraries in the lib directory and link the dynamic libraries. The detailed steps are in the README or Makefile in the corresponding directories.
+
 ## Compile and install deal.II library. The method refer to (1).
+
 ## Compile and install libxc library with:
     $ cd lib/libxc
     $ cmake -H. -Bobjdir
@@ -90,7 +109,9 @@ Compile deal.II, libxc, FEMOCS, and MLIP library, respectively. Then, place the 
 3. Run FEcMD
 
 3.1 Commands
+
 There are various commands to perform the corresponding function.
+
 Perform ED-MD simulation:
     $ ./fecmd
 Perform ED simulation:
@@ -124,6 +145,7 @@ The following is the input file and output file documents.
 
 ## Input file:
 Definition of variable
+
 ===============Example for md.in:==============
 #==========================================
 # MD parameters
@@ -159,9 +181,8 @@ lj_length = 3.4        # L-J potential length parameter [Angstrom]
 ensemble = NVT         # Ensemble: NVE, NVT, NPT or nonEquil
 Nthreads = 8           # Parallel threads for MD
 pedestal_thick = 0     # Fixed atomic thickness at the bottom
--------------------------------------------------------------
---------------------------tip Maker--------------------------
-
+#tip Maker
+#------------------------------------------
 cell_order = disorder  # Atomic ordering of the alloys constructed:
                        # order or disorder
 cell_file = in/mdlat.in.xyz  # Field emitter atomic strcture file name
@@ -171,55 +192,51 @@ tip_R = 30             # The radius of the mushroom cap R [Angstrom]
 tip_r = 15            # The radius of cone top rt [Angstrom]
 tip_h = 500            # Total hight [Angstrom]
 tip_theta = 3          # Half-angle [degree]
--------------------------------------------------------------
-------------------------neighbor list------------------------
-
+#neighbor list
+#------------------------------------------
 nebrTabFac = 200       # The Maximum number of adjacent atoms in the cutoff radius
 rNebrShell = 0.3       # The radius of shell for neighbor list method [Angstrom]
--------------------------------------------------------------
-----------------------adjust temperature---------------------
-
+#adjust temperature
+#------------------------------------------
 stepAdjustTemp = 10    # Average steps for adjusting the temperature
 stepInitlzTemp = 1     # Average steps for adjusting the inital temperature
--------------------------------------------------------------
------------------------ligancy analysis----------------------
-----------------------mark surface atoms---------------------
-
+#ligancy analysis && mark surface atoms
+#------------------------------------------
 rSurfCut = 2.951       # The cut-off radius for extracting surface atoms [Angstrom]
 nSurfCut = 8           # The atomic number threshold for extracting surface atoms
 rFlyCut = 3.818        # The cut-off radius for extracting atoms flying out of the surface [Angstrom]
 nFlyCut = 2            # The atomic number threshold for extracting atoms flying out of the surface
 stepSurf = 8           # Average steps for extracting surface atoms
 stepLigancy = 8        # Average steps for calculating the coordination number
--------------------------------------------------------------
---------------------velocity distribution--------------------
+#velocity distribution
+#------------------------------------------
 rangeVel = 10.         # The range of velocity distribution [Angstrom/ps]
 limitVel = 100         # The limit steps of velocity distribution
 stepVel = 5            # The average steps of velocity distribution
 sizeHistVel = 200      # The size of histogram
--------------------------------------------------------------
-----------------------------RDF------------------------------
+#RDF
+#------------------------------------------
 limitRdf = 100         # The limit steps of RDF
 stepRdf = 10           # The average steps of RDF
 rangeRdf = 4.          # The range of RDF [Angstrom]
 sizeHistRdf = 200      # The size of histogram
--------------------------------------------------------------
-----------------------------NPT------------------------------
+#NPT
+#------------------------------------------
 extPressure = 26.2     # External pressure [GPa]
 massS = 100            # mass parameter whose value must be determined empirically
 massV = 0.000001       # mass parameter whose value must be determined empirically
--------------------------------------------------------------
--------------------------Maxwell stress----------------------
+#Maxwell stress 
+#------------------------------------------
 Maxwell_rate = 0.      # The rise rate of Maxwell stress [GPa/ps]
 Maxwell_max = 10       # The Maximum of Maxwell stress [GPa]
 Maxwell_begin = 0      # The initial Maxwell stress [GPa]
--------------------------------------------------------------
----------------------lattice conductivity--------------------
+#lattice conductivity 
+#------------------------------------------
 gravField = 0.
 wallTempHi = 800.      # The upper temperature limit of heat conduction
 wallTempLo = 300.      # The lower temperature limit of heat conduction
--------------------------------------------------------------
-------------------------T/V-profile--------------------------
+#T/V-profile
+#------------------------------------------
 limitGrid = 100        # The limit steps of T/V-profile
 stepGrid = 50          # The average steps of T/V-profile
 sizeHistGrid = 1 1 25  # The size of histogram grids
