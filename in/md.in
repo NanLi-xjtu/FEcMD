@@ -1,0 +1,57 @@
+-------------------------------------------------------------
+-------------------------simulation--------------------------
+deltaT = 4             # The time interval of each step [fs]
+temperature = 300      # Initial temperature [K]
+vMax_set = 100000000   # Maximim atomic velocity [K]
+vMin_set = 0           # Minimim atomic velocity [K]
+Nelems = 1             # The number of elements
+elems = Cu             # Elements types
+mass = 63.546          # Relative atom mass for each elements
+stepAvg = 10            # The average steps of statistical energy and temperature
+stepMovie = 250        # The average steps of the output atomic trajectory
+stepEquil = 250        # The steps for inital equilibrium
+randSeed = 7           # Random seed
+boundary = n           # Boundary condition: periodic (p) or nonperiodic (n)
+regionScale = 3. 3. 1.5    # MD box scaling factor
+structure_type = FCC   # Structure type: FCC, BCC or cubic 
+                       # (consistent with the input atomic structure file)
+lattice = 3.615        # Lattice parameters [Angstrom]
+interact_method = nebr # Statistical method of interacting atom pairs: 
+force_type = alloy     # Types of atomic interactions: 
+                       # lj, metal, alloy, snap, eamfs, MTP
+force_file = in/potential/Cu_mishin1.eam.alloy  # Atomic interaction potential file name
+ensemble = nonEquil    # Ensemble: NVE, NVT, NPT or nonEquil
+Nthreads = 8           # Parallel threads for MD
+pedestal_thick = 6     # Fixed atomic thickness at the bottom
+-------------------------------------------------------------
+------------------------neighbor list------------------------
+nebrTabFac = 100       # The Maximum number of adjacent atoms in the cutoff radius
+rNebrShell = 0.3       # The radius of shell for neighbor list method [Angstrom]
+-------------------------------------------------------------
+----------------------adjust temperature---------------------
+stepAdjustTemp = 10    # Average steps for adjusting the temperature
+stepInitlzTemp = 1     # Average steps for adjusting the inital temperature
+-------------------------------------------------------------
+-----------------------ligancy analysis----------------------
+----------------------mark surface atoms---------------------
+rSurfCut = 3.1         # The cut-off radius for extracting surface atoms [Angstrom]
+nSurfCut = 12          # The atomic number threshold for extracting surface atoms
+stepSurf = 8           # Average steps for extracting surface atoms
+stepLigancy = 8        # Average steps for calculating the coordination number
+-------------------------------------------------------------
+--------------------velocity distribution--------------------
+rangeVel = 10.         # The range of velocity distribution [Angstrom/ps]
+limitVel = 100         # The limit steps of velocity distribution
+stepVel = 20           # The average steps of velocity distribution
+sizeHistVel = 200      # The size of histogram
+-------------------------------------------------------------
+----------------------------RDF------------------------------
+limitRdf = 100         # The limit steps of RDF
+stepRdf = 10           # The average steps of RDF
+rangeRdf = 4.          # The range of RDF [Angstrom]
+sizeHistRdf = 200      # The size of histogram
+-------------------------------------------------------------
+------------------------T/V-profile--------------------------
+limitGrid = 100        # The limit steps of T/V-profile
+stepGrid = 10          # The average steps of T/V-profile
+sizeHistGrid = 1 1 25  # The size of histogram grids

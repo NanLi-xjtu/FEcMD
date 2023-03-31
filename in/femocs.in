@@ -1,0 +1,88 @@
+#==========================================
+# FEMOCS parameters
+#
+# Spacing does not matter
+# Commands and arguments can but don't have to be separated with "="-sign
+# Commands and arguments are case-insensitive
+# Commands can be in any order
+#------------------------------------------
+infile = out/md/femocs.in.xyz
+# General
+#---------------
+timestep = 4               # MD time step [fs]
+timelimit = 200                 # simulation time limit [ps]
+movie_timestep = 1000		# time between frames of movie files; 0 turns writing off [fs]
+latconst = 3.615                # lattice constant [A]
+radius = 70                     # inner radius of coarsening cylinder [A]
+distance_tol = 0.45             # max RMS distance atoms are allowed to move between runs before the solution is recalculated; 0 forces to recalculate every time-step
+n_read_conf = 0                 # nr of timesteps between re-reading conf file; 0 reads file only once
+femocs_verbose_mode = verbose    # control verbosity in console; mute, silent or verbose
+clear_output = true             # clear out folder before the run
+coarse_theta = 10               # apex angle of coarsening cylinder [deg]
+coarse_factor = 0.5 12 2         # coarsening factor; bigger number gives coarser surface
+                                # 1st - coarsening factor for atoms outside the coarsening cylinder
+                                # 2nd - minimum distance between atoms in nanotip below apex [latconst/4]
+                                # 3rd - minimum distance between atoms in nanotip apex [latconst/4]
+
+# Atom processing
+#---------------
+nnn = 12                       # nr of nearest neighbours of bulk material within coord_cutoff radius; needs to be adjusted if coord_cutoff is changed
+coord_cutoff = 3.1              # coordination analysis cut-off radius [A]
+cluster_cutoff = 4.2             # cluster anal. cut-off radius [A]; if 0, cluster anal. uses coord_cutoff instead
+mesh_quality = 1.8              # minimum mesh quality Tetgen is allowed to make; smaller nr gives more symmetric elements
+coplanarity = 1.0               # parameter defining the max flatness of tetrahedron
+surface_smooth_factor = 1.1     # surface smoothing factor; bigger number gives smoother but more distorted surface
+smooth_steps = 3                # number of surface mesh smoothing iterations; 0 turns smoothing off
+cluster_anal = ture            # enable or disable cluster analysis
+clean_surface = ture           # activate extra effort to clean surface atoms
+charge_smooth_factor = 100.0    # parameter controlling face-charge distribution
+
+# Parameters for extending simulation domain
+#---------------
+extended_atoms = in/extension.xyz   # file with atoms of extended surface
+femocs_periodic = false          # imported atoms have periodic boundaries in x- & y-direction; must be false in systems without slab
+box_width = 10                  # minimal simulation box width [tip height]
+box_height = 10                  # simulation box height [tip height]
+bulk_height = 20                # bulk substrate height [latconst]
+
+# Field emission parameters
+#---------------
+work_function = 4.59             # work function [eV]
+emitter_blunt = false            # if true blunt emitter SN barrier approximation used
+emitter_cold = false
+emitter_qe = true        #if true quantum effect of space charge will be considered
+func_X_id = 1            #exchange functional id
+func_C_id = 9            #correlation functional id
+
+# Heating parameters
+#---------------
+heat_mode = transient           # method to calculate heating effects in material; none, stationary, transient, converge
+force_mode = all                # forces to be calculated; all, lorentz, none
+vscale_tau = 1500.0             # time constant in temperature scaler
+#t_ambient =  300.0             # temperature at the bottom of simulation cell [K]
+heat_limit = 0 1.e5             # Minimum amd Maxmum allowed temperature [K]
+lorentz = 2.e-8                 # Lorentz constant [W Ohm K-2]
+heat_cp = 3.491e-24             # Volumetric heat capacity [J/(K*Ang^3)]
+Ncell = 3 3 100                 # the size of temperature cells
+temperature_mode = double       #single (electron heat conduction) or double (two-temperature model)
+heat_mapping_R = 200.;          # the radius of the heat mapping box [Angstrom]
+heat_mapping_H = 1000.;         # the height of the heat mapping box [Angstrom]
+heat_dt = 40                    # heat calculation time step [fs]
+
+# Field parameters
+#---------------
+charge_tolerance 0.8 1.2        # min and max tolerance of charge calculation
+field_tolerance 0.1 100.0         # min and max allowed deviation of maximum field from the semianalytical one
+field_mode = transient          # method to calculate field; laplace or transient
+potential_limit = -2 1.e4       # the minimum and maxmum value of potential
+field_cgtol = 1e-3              # tolerance of field solver
+elfield_mode = DC               # Method to control the applied electric field; DC, AC, pulse, or index E*(1-exp(-t/tau))
+elfield = -0.0320000             # DC--value of applied elctric field; pulse--initial value  [V/Angstrom][10000 MV/m]
+anode_bc = neumann              # boundary condition type at anode; dirichlet or neumann
+
+# PIC parameters
+#---------------
+pic_dtmax = 0.5                 # maximum time interval between particle push in PIC [fs]
+pic_collide_ee = true           # turn on electron superparticle collisions
+electron_weight = 0.01          # electron superparticle weight [nr of SPs]
+pic_periodic = true
