@@ -29,7 +29,7 @@ The software OVITO can be used to visualize the results files "*.movie" or "*.xy
 
 (1) Extract the executable without modifying the source code.
 
-## Run the following commands to extract and access to all of the original files:
+## Run the following commands to extract and access to all of the original files (user should also extracts and access all files in library):
     $ unzip FEcMD.zip 
     $ sudo chmod -R 775 FEcMD
     $ cd FEcMD
