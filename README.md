@@ -277,8 +277,8 @@ sizeHistGrid = 1 1 25  # The size of histogram grids
 infile = out/md/femocs.in.xyz
 # General
 #---------------
-md_timestep = 4               # MD time step [fs]
-time_limit = 200                 # simulation time limit [ps]
+timestep = 4                    # time step (should equal to deltaT in ED-MD simulation) [fs]
+timelimit = 200                 # simulation time limit [ps]
 movie_timestep = 1000		# time between frames of movie files; 0 turns writing off [fs]
 latconst = 3.615                # lattice constant [A]
 radius = 70                     # inner radius of coarsening cylinder [A]
