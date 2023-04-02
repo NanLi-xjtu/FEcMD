@@ -1,5 +1,5 @@
 /*
- *  main file for FEcMD
+ *  Main function for FEcMD
  *
  *  Field emission coupled with molecular dynamics simulation (FEcMD) software package is a computational tool 
  *  for studying the electron emission characteristics and the atomic structure evolution of micro- and nano-protrusions made of 
