@@ -65,9 +65,9 @@ Add ‘/PATH/TO/FEcMD/lib/deal.II/lib’ below the ‘include ld.so.conf.d/*.con
 	
 ## Next, extract and run the executable
     $ cd ../../../../
-	$ unzip executable_file.zip
-	$ cp executable_file/fecmd ./
-	$ sudo chmod 775 fecmd
+    $ unzip executable_file.zip
+    $ cp executable_file/fecmd ./
+    $ sudo chmod 775 fecmd
     $ ./fecmd.
 ## How to run examples:
     $ cd example/the/folder/contains/*.sh
