@@ -1,11 +1,12 @@
 /*
- * Test program to demonstrate and test FEMOCS with various geometries.
- * Testing mode is picked from command line argument -
- * without argument the configuration script from input folder is used,
- * but with cmd line parameter other pre-tuned modes can be chosen.
+ *  main file for FEcMD
  *
- *  Created on: 19.04.2016
- *  Author: veske
+ *  Field emission coupled with molecular dynamics simulation (FEcMD) software package is a computational tool 
+ *  for studying the electron emission characteristics and the atomic structure evolution of micro- and nano-protrusions made of 
+ *  pure metals or multi-component alloys by means of multi-physics and multi-scale methodology. 
+ *
+ *  Created on: 2023/4/1
+ *  Author: NanLi
  */
 #include "main.h"
 
@@ -154,21 +155,6 @@ int main (int argc, char **argv)
 	system ("cp in/femocs.in.xyz out/md/");
 		success = 0;
 	if (infile != "") read_n_atoms(infile, n_atoms);
-	
-/*
-	int* flag  = (int*)malloc(n_atoms * sizeof(int));
-	double* x  = (double*) malloc(n_atoms * sizeof(double));
-	double* y  = (double*) malloc(n_atoms * sizeof(double));
-	double* z  = (double*) malloc(n_atoms * sizeof(double));
-	double* phi= (double*) malloc(n_atoms * sizeof(double));
-	double* Ex = (double*) malloc(n_atoms * sizeof(double));
-	double* Ey = (double*) malloc(n_atoms * sizeof(double));
-	double* Ez = (double*) malloc(n_atoms * sizeof(double));
-	double* En = (double*) malloc(n_atoms * sizeof(double));
-	double* T  = (double*) malloc(n_atoms * sizeof(double));
-	double* xq = (double*) malloc(4 * n_atoms * sizeof(double));
-	if (infile != "") read_atoms(infile, x, y, z);
-*/
 
 /**************************************************************************************/
 /**************************************Main Loop***************************************/
@@ -199,15 +185,6 @@ int main (int argc, char **argv)
 /*---------------------------------------FEMOCS---------------------------------------*/
 		success = femocs.import_atoms(infile, add_rnd_noise);
 		success += femocs.run();
-
-//		femocs.export_data(T, n_atoms, "temperature");
-//		for (n = 0; n < n_atoms; n ++) printf ("%.2e ", T);
-//		success += femocs.export_elfield(0, Ex, Ey, Ez, En);
-//		success += femocs.export_temperature(n_atoms, T);
-//		success += femocs.export_charge_and_force(n_atoms, xq);
-//		success += femocs.interpolate_elfield(n_atoms, x, y, z, Ex, Ey, Ez, En, flag);
-//		success += femocs.interpolate_phi(n_atoms, x, y, z, phi, flag);
-
 /*------------------------------------------------------------------------------------*/
 /*-------------------------------------INTERFACE--------------------------------------*/
 		if (strcmp (model, "ED-MD") == 0) {
@@ -234,16 +211,6 @@ int main (int argc, char **argv)
 		time = (int)(end-start);
 		printf("\none step (iteration) time:%.3f,  time taken = %d h %d min %d s\n", end - start1,  time/ 3600, \
 			(time % 3600) / 60, time % 60);
-/*
-		output = WriteFile ("out/time.dat");
-		if (time_flag == 0) {
-			fprintf (output, "simulation_time(ps) onestep_realtime(s) realtime(h/min/s)\n");
-			time_flag = 1;
-		}
-		fprintf(output, "%.4f %.3f %d/%d/%d\n", TIMENOW_ps, end - start1, time/ 3600, \
-			(time % 3600) / 60, time % 60);
-		fclose (output);
-*/
 	}
 
 	//md
@@ -255,7 +222,6 @@ int main (int argc, char **argv)
 
 	//femocs
 	print_progress("\n> full run of Femocs", success == 0);
-//	free(flag);
 
 	return 0;
 }
