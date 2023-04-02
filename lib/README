@@ -1,3 +1,6 @@
 libraries
 
-All of them shold be unziped before install FEcMD.
+All of them shold be unziped with:
+
+    $ cat librariy_name* > librariy_name.zip
+    $ unzip librariy_name.zip
