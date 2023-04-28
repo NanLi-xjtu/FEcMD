@@ -58,10 +58,10 @@ void TemperatureInterface (int step)
 		input = ReadFile (filename);
 		while (1) {
 			if (fgets (line, 1024, input) == 0) break;
-			if (strncasecmp (line, "Ncell", 5) == 0) sscanf (line, "Ncell = %d %d %d", &Ncell.x, &Ncell.y, &Ncell.z);
-			GetDoubleVariable (line, "heat_dt =", &heat_dt); //--fs
-			GetDoubleVariable (line, "md_timestep =", &md_timestep); //--fs
-                        GetCharVariable (line, "temperature_mode =", Tmode);
+			GetIntVector (line, "Ncell", &Ncell);
+			GetDoubleVariable (line, "heat_dt", &heat_dt); //--fs
+			GetDoubleVariable (line, "timestep", &md_timestep); //--fs
+                        GetCharVariable (line, "temperature_mode", Tmode);
 		}
 		fclose (input);
 		femocsin_flag = 1;
