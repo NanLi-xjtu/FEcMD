@@ -201,6 +201,7 @@ int main (int argc, char **argv)
 			system ("cat out/ch_solver.xyz >> out/ch_solver.movie");
 			system ("cat out/temperature_phonon.xyz >> out/temperature_phonon.movie");
 			system ("cat out/exchange-correlation.xyz >> out/exchange-correlation.movie");
+			system ("cat out/getelec.dat >> out/getelec.movie.dat");
 			system ("mv out/*.vtk out/mesh/");
 			frame ++;
 		}
