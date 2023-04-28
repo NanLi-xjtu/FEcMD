@@ -58,10 +58,10 @@ clean:
 	rm -rf obj/*.o fecmd out/*
 
 clean-all:
-	rm -rf obj/*.o fecmd out/* && cd ../md && make clean && cd ../femocs && make clean
+	rm -rf obj/*.o fecmd out/* && cd md && make clean && cd ../lib/femocs && make clean && cd GETELEC && make clean
 
 md_lib:
 	cd md && make md_lib
 
 femocs_lib:
-	cd lib/femocs && make lib
+	cd lib/femocs/GETELEC && make && cd ../ && make lib
